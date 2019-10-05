@@ -23,15 +23,16 @@ export default class TodoList extends Component {
     }
 
     componentDidMount(){
-        const url = todoApi;
-        axios.get(url)
+        axios.get(todoApi)
             .then(res => this.setState({todos: res.data}))
             .catch(err => console.log(err));
     }
 
     todoList(){
-        return this.state.todos.map( (curr, i) => {
-            return <Todo todo={curr} key={i} />;
+        return this.state.todos.sort((a, b) => b.priority - a.priority)
+                                .sort((a, b) => a.completed - b.completed)
+                                .map( (todo, i) => {
+            return <Todo todo={todo} key={i} />;
         });
     }
 

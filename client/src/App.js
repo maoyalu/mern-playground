@@ -14,13 +14,12 @@ class App extends Component {
   render(){
     return(
       <Router>
-        <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <a className="nav-brand" href="https://yalustudio.com">
               
             </a>
-            <Link to="/" className="navbar-brand">MERN-Playground</Link>
-            <div className="collapase navbar-collapse">
+            <Link to="/" className="navbar-brand">PLAYGROUND</Link>
+            <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/" className="nav-link">Todos</Link>
@@ -31,11 +30,13 @@ class App extends Component {
               </ul>
             </div>
           </nav>
-        <br></br>
+        <div className="container">
+          
+          <br></br>
 
-        <Route path="/" exact component={TodoList} />
-        <Route path="/edit/:id" component={EditTodo} />
-        <Route path="/create" component={CreateTodo} />
+          <Route path="/" exact component={TodoList} />
+          <Route path="/edit/:id" component={EditTodo} />
+          <Route path="/create" component={CreateTodo} />
         </div>
       </Router>
     );
