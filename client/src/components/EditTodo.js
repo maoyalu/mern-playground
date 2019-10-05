@@ -39,14 +39,13 @@ export default class EditTodo extends Component {
             priority: this.state.priority,
             completed: this.state.completed
         };
-        console.log(todo)
         const url = todoUpdateApi + this.props.match.params.id
         axios.patch(url, todo)
             .then(res => console.log(res.data));
         this.props.history.push('/');
     }
 
-    onChangeTodoCompleted(e){
+    onChangeTodoCompleted(){
         this.setState({
             completed: !this.state.completed
         });
@@ -101,6 +100,7 @@ export default class EditTodo extends Component {
                         <input type="submit" value="Update Todo" className="btn btn-primary" />
                     </div>
                 </form>
+
             </div>
         );
     }
