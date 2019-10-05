@@ -28,7 +28,8 @@ export default class CreateTodo extends Component {
         const newTodo = {
             description: this.state.description
         };
-
+        
+        const BASE_URL = process.env.HOST
         const url = server + todoCreateApi
         axios.post(url, newTodo)
             .then(res => console.log(res.data));

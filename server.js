@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require("path");
 
 
 const bodyParser = require('body-parser');
@@ -20,23 +21,22 @@ app.use(bodyParser.json());
 
 // Set up mongoose connection
 const db = process.env.MONGODB_URI || require('./config/keys').mongoURI;
-mongoose.connect(db)
+mongoose.connect(db, {useNewUrlParser: true})
         .then(() => console.log('MongoDB Connected...'))
         .catch(err => console.log(`An error occurred: ${err}`));
-
-
-// Serve client
-const path = require("path");
-app.use(express.static(path.join(__dirname, "client", "build")));
 
 
 // Use Routes
 app.use('/api/todos', todosRouter);
 
 
-app.get("*", (req, res) => {
-    res.sendfile(path.join(__dirname, "client", "build", "index.html"));
-});
+// Serve files on Heroku
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static('client/build/'));
+    app.get("*", (req, res) => {
+        res.sendfile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+}
 
 
 // Serve App
