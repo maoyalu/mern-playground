@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import {server, todoApi} from '../config/server';
+import {todoApi} from '../config/server';
 import axios from 'axios';
 
 
@@ -23,7 +23,7 @@ export default class TodoList extends Component {
     }
 
     componentDidMount(){
-        const url = server + todoApi;
+        const url = todoApi;
         axios.get(url)
             .then(res => this.setState({todos: res.data}))
             .catch(err => console.log(err));

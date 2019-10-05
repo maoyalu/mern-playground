@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {server, todoCreateApi} from '../config/server';
+import {todoCreateApi} from '../config/server';
 
 
 export default class CreateTodo extends Component {
@@ -29,14 +29,13 @@ export default class CreateTodo extends Component {
             description: this.state.description
         };
         
-        const BASE_URL = process.env.HOST
-        const url = server + todoCreateApi
-        axios.post(url, newTodo)
+        axios.post(todoCreateApi, newTodo)
             .then(res => console.log(res.data));
 
         this.setState({
             description: ''
         });
+        this.props.history.push('/');
     }
 
     render(){

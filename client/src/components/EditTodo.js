@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {server, todoApi, todoUpdateApi} from '../config/server'
+import {todoApi, todoUpdateApi} from '../config/server'
 
 
 export default class EditTodo extends Component {
@@ -20,7 +20,7 @@ export default class EditTodo extends Component {
     }
 
     componentDidMount(){
-        const url = server + todoApi + this.props.match.params.id
+        const url = todoApi + this.props.match.params.id
         axios.get(url)
             .then(res => {
                 this.setState({
@@ -40,7 +40,7 @@ export default class EditTodo extends Component {
             completed: this.state.completed
         };
         console.log(todo)
-        const url = server + todoUpdateApi + this.props.match.params.id
+        const url = todoUpdateApi + this.props.match.params.id
         axios.patch(url, todo)
             .then(res => console.log(res.data));
         this.props.history.push('/');
