@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react'
 import {todoApi, todoDeleteApi} from '../config/server';
 import axios from 'axios';
 
@@ -10,9 +11,9 @@ const Todo = props => (
         <td className={props.todo.completed ? 'completed' : ''}>{props.todo.priority}</td>
         <td>
             <Link to={"/edit/" + props.todo._id}>
-                <button className="btn-primary" style={{marginRight:"5px"}}>Edit</button>
+                <Button primary>Edit</Button>
             </Link>
-            <button onClick={() => props.onDelete(props.todo._id)} className="btn-danger">Delete</button>
+            <Button negative onClick={() => props.onDelete(props.todo._id)}>Delete</Button>
         </td>
     </tr>
 );
@@ -52,13 +53,15 @@ export default class TodoList extends Component {
     render(){
         return(
             <div>
-                <h3>Todo List</h3>
+                <Link to={"/create"}>
+                    <Button positive>New Todo</Button>
+                </Link>
                 <table className="table table-striped" style={{ marginTop: 20 }}>
                     <thead>
                         <tr>
                             <th>Description</th>
                             <th>Priority</th>
-                            <th>Action</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
